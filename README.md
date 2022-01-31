@@ -1,5 +1,7 @@
 # TrackSystem
 
+Create Ranks and Tracks like in LuckPerms and assign it to a user (player)
+
 Type in [/tracksystem help] to see all commands.
 You can find the first snpshot in the releases tab.
 https://github.com/domTheRab/TrackSystem/releases/tag/1.0-SNAPSHOT
