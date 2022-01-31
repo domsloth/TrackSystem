@@ -27,7 +27,7 @@ public class AHelpCommand extends ACommand {
 
 
     private void sendBody(CommandSender player, String label, ACommand cmd) {
-        player.sendMessage(String.format("%s/%s %s", ChatColor.YELLOW, label, cmd.getUsage()));
+        player.sendMessage(String.format("%s/%s %s %s", ChatColor.YELLOW, getParent().getLabel(), label, cmd.getUsage()));
     }
 
     private void sendFooter(CommandSender player) {

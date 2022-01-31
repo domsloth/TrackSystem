@@ -8,7 +8,6 @@ import me.emirose.plugin.tracksystem.repo.TrackRepository;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static jdk.javadoc.internal.doclets.toolkit.util.DocPath.parent;
 
 public final class TrackSystemPlugin extends JavaPlugin {
 

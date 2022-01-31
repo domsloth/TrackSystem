@@ -31,6 +31,7 @@ public class RankChangeWeightCommand extends ACommand {
 
         rank.getRank().setWeight(weight);
         rank.getTrack().update();
+        player.sendMessage(String.format("%sUpdated rank '%s' to new weight %d", ChatColor.GREEN, rank.getRank().getName(), rank.getRank().getWeight()));
         return true;
     }
 

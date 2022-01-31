@@ -2,13 +2,11 @@ package me.emirose.plugin.tracksystem.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 
 import java.util.*;
 
-public abstract class ACommand implements CommandExecutor {
+public abstract class ACommand implements CommandExecutor, TabCompleter {
 
     private String label;
     private int depth;
@@ -20,8 +18,11 @@ public abstract class ACommand implements CommandExecutor {
         this.label = label.toLowerCase();
         this.depth = 0;
 
-        // TODO: Check for NPE
-        Bukkit.getPluginCommand(label).setExecutor(this);
+        new AHelpCommand(this);
+
+        PluginCommand pluginCommand = Bukkit.getPluginCommand(label);
+        pluginCommand.setTabCompleter(this);
+        pluginCommand.setExecutor(this);
     }
 
     protected ACommand(ACommand parent, String label) {
@@ -98,9 +99,26 @@ public abstract class ACommand implements CommandExecutor {
         return subCommands;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     protected void sendHelp(CommandSender player) {
         getSubCommand("help").ifPresent(aCommand -> {
             aCommand.onCommand(player, new String[]{});
         });
     }
+
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        ArrayList<String> result = new ArrayList<>();
+
+        if (args.length == depth + 1) {
+            result.addAll(getSubCommands().keySet());
+        }
+
+        return result;
+    }
+
 }
