@@ -96,6 +96,16 @@ public class TrackRepository {
         return TransactionResult.SUCCESS;
     }
 
+    public TransactionResult promotePreviousRank(User user) {
+        Rank nextRank = getPreviousRank(user.getRank().getTrack(), user.getRank().getRank());
+        if (nextRank == null) {
+            return TransactionResult.ERROR_ALREADY_LOWEST;
+        }
+
+        user.setRank(new TrackedRank(user.getRank().getTrack(), nextRank));
+        return TransactionResult.SUCCESS;
+    }
+
     public void setTrack(User user, Track track) {
         user.setRank(new TrackedRank(track, getDefaultRankForTrack(track)));
     }

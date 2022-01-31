@@ -9,15 +9,35 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class PromoteCommand extends ACommand {
+public abstract class PromoteCommand extends ACommand {
+
+    public enum PromoteDirection {
+        UP,
+        DOWN
+    }
+
+    public static class PromoteUPCommand extends PromoteCommand {
+        public PromoteUPCommand(UserStorage userStorage, TrackRepository trackRepository) {
+            super(userStorage, trackRepository, "promoteuser", PromoteDirection.UP);
+        }
+    }
+
+    public static class PromoteDownCommand extends PromoteCommand {
+        public PromoteDownCommand(UserStorage userStorage, TrackRepository trackRepository) {
+            super(userStorage, trackRepository, "demoteuser", PromoteDirection.DOWN);
+        }
+    }
 
     private final UserStorage userStorage;
     private final TrackRepository trackRepository;
+    private final PromoteDirection direction;
 
-    public PromoteCommand(UserStorage userStorage, TrackRepository trackRepository) {
-        super("promoteuser");
+
+    private PromoteCommand(UserStorage userStorage, TrackRepository trackRepository, String label, PromoteDirection direction) {
+        super(label);
         this.userStorage = userStorage;
         this.trackRepository = trackRepository;
+        this.direction = direction;
     }
 
     @Override
@@ -35,14 +55,27 @@ public class PromoteCommand extends ACommand {
 
         User user = userStorage.load(target.getUniqueId());
 
-        TrackRepository.TransactionResult transactionResult = trackRepository.promoteNextRank(user);
+
+        TrackRepository.TransactionResult transactionResult = null;
+
+        switch (direction) {
+            case UP:
+                transactionResult = trackRepository.promoteNextRank(user);
+                break;
+            case DOWN:
+                transactionResult = trackRepository.promotePreviousRank(user);
+                break;
+        }
 
         if (transactionResult == TrackRepository.TransactionResult.ERROR_ALREADY_HIGHEST) {
             player.sendMessage(String.format("%sCan't promote this player any further!", ChatColor.RED));
             return false;
+        } else if (transactionResult == TrackRepository.TransactionResult.ERROR_ALREADY_LOWEST) {
+            player.sendMessage(String.format("%sCan't demote this player any further!", ChatColor.RED));
+            return false;
         }
 
-        player.sendMessage(String.format("%sSuccessfully promoted the user", ChatColor.GREEN));
+        player.sendMessage(String.format("%sSuccessfully updated the user", ChatColor.GREEN));
         userStorage.save(user);
         return true;
     }
