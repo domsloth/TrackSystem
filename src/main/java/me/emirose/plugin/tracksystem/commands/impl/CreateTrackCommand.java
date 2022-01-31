@@ -12,8 +12,8 @@ public class CreateTrackCommand extends ACommand {
 
     private final TrackRepository trackRepository;
 
-    public CreateTrackCommand(TrackRepository trackRepository) {
-        super("createtrack");
+    public CreateTrackCommand(ACommand parent, TrackRepository trackRepository) {
+        super(parent, "createtrack");
         this.trackRepository = trackRepository;
     }
 
@@ -44,7 +44,7 @@ public class CreateTrackCommand extends ACommand {
     }
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "<name> [<weight>]";
     }
 }

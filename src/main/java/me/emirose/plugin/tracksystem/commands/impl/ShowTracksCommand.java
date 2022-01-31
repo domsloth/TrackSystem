@@ -12,8 +12,8 @@ public class ShowTracksCommand extends ACommand {
 
     private final TrackSystemPlugin plugin;
 
-    public ShowTracksCommand(TrackSystemPlugin plugin) {
-        super("showtracks");
+    public ShowTracksCommand(ACommand parent, TrackSystemPlugin plugin) {
+        super(parent, "showtracks");
         this.plugin = plugin;
     }
 
@@ -29,7 +29,7 @@ public class ShowTracksCommand extends ACommand {
     }
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "";
     }
 

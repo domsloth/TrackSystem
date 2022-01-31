@@ -17,8 +17,8 @@ public class SetTrackCommand extends ACommand {
     private final UserStorage userStorage;
     private final TrackRepository trackRepository;
 
-    public SetTrackCommand(UserStorage userStorage, TrackRepository trackRepository) {
-        super("settrack");
+    public SetTrackCommand(ACommand parent, UserStorage userStorage, TrackRepository trackRepository) {
+        super(parent, "settrack");
         this.userStorage = userStorage;
         this.trackRepository = trackRepository;
     }
@@ -65,7 +65,7 @@ public class SetTrackCommand extends ACommand {
     }
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "<user> <track>";
     }
 }

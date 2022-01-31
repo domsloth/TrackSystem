@@ -1,5 +1,6 @@
 package me.emirose.plugin.tracksystem.commands.impl;
 
+import jdk.javadoc.internal.doclets.toolkit.util.DocPath;
 import me.emirose.plugin.tracksystem.commands.ACommand;
 import me.emirose.plugin.tracksystem.model.Track;
 import me.emirose.plugin.tracksystem.repo.TrackRepository;
@@ -12,14 +13,13 @@ public class CreateRankCommand extends ACommand {
 
     private TrackRepository trackRepository;
 
-    public CreateRankCommand(TrackRepository trackRepository) {
-        super("createrank");
+    public CreateRankCommand(ACommand parent, TrackRepository trackRepository) {
+        super(parent, "createrank");
         this.trackRepository = trackRepository;
     }
 
     @Override
     protected boolean onCommand(CommandSender player, String[] args) {
-        System.out.println("debug");
         String name = null;
         Track track = null;
 
@@ -47,7 +47,7 @@ public class CreateRankCommand extends ACommand {
 
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "<name> [<track>]";
     }
 

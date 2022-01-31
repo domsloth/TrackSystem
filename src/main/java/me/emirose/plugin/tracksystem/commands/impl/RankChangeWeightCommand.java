@@ -10,8 +10,8 @@ public class RankChangeWeightCommand extends ACommand {
 
     private final TrackRepository trackRepository;
 
-    public RankChangeWeightCommand(TrackRepository trackRepository) {
-        super("setweight");
+    public RankChangeWeightCommand(ACommand parent, TrackRepository trackRepository) {
+        super(parent, "setweight");
         this.trackRepository = trackRepository;
     }
 
@@ -59,7 +59,7 @@ public class RankChangeWeightCommand extends ACommand {
     }
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "<rank> <weight>";
     }
 }

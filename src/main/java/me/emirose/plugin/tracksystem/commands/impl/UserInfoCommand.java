@@ -1,7 +1,6 @@
 package me.emirose.plugin.tracksystem.commands.impl;
 
 import me.emirose.plugin.tracksystem.commands.ACommand;
-import me.emirose.plugin.tracksystem.database.ADatabase;
 import me.emirose.plugin.tracksystem.database.impl.user.UserStorage;
 import me.emirose.plugin.tracksystem.model.TrackedRank;
 import me.emirose.plugin.tracksystem.model.User;
@@ -16,8 +15,8 @@ public class UserInfoCommand extends ACommand {
 
     private final UserStorage userDatabase;
 
-    public UserInfoCommand(UserStorage userDatabase) {
-        super("userinfo");
+    public UserInfoCommand(ACommand parent, UserStorage userDatabase) {
+        super(parent, "userinfo");
         this.userDatabase = userDatabase;
     }
 
@@ -69,7 +68,7 @@ public class UserInfoCommand extends ACommand {
 
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "[<player|uuid>]";
     }
 }

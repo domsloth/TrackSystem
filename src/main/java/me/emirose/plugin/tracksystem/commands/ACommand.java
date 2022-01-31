@@ -14,6 +14,7 @@ public abstract class ACommand implements CommandExecutor {
     private int depth;
     private String permission = "";
     private Map<String, ACommand> subCommands = new HashMap<>();
+    private ACommand parent;
 
     protected ACommand(String label) {
         this.label = label.toLowerCase();
@@ -26,6 +27,7 @@ public abstract class ACommand implements CommandExecutor {
     protected ACommand(ACommand parent, String label) {
         this.label = label.toLowerCase();
         this.depth = parent.depth + 1;
+        this.parent = parent;
 
         parent.subCommands.put(this.label, this);
     }
@@ -86,6 +88,19 @@ public abstract class ACommand implements CommandExecutor {
 
     protected abstract boolean onCommand(CommandSender player, String[] args);
 
-    protected abstract String getUsage();
+    public abstract String getUsage();
 
+    public ACommand getParent() {
+        return parent;
+    }
+
+    public Map<String, ACommand> getSubCommands() {
+        return subCommands;
+    }
+
+    protected void sendHelp(CommandSender player) {
+        getSubCommand("help").ifPresent(aCommand -> {
+            aCommand.onCommand(player, new String[]{});
+        });
+    }
 }

@@ -17,14 +17,14 @@ public abstract class PromoteCommand extends ACommand {
     }
 
     public static class PromoteUPCommand extends PromoteCommand {
-        public PromoteUPCommand(UserStorage userStorage, TrackRepository trackRepository) {
-            super(userStorage, trackRepository, "promoteuser", PromoteDirection.UP);
+        public PromoteUPCommand(ACommand parent, UserStorage userStorage, TrackRepository trackRepository) {
+            super(parent, userStorage, trackRepository, "promoteuser", PromoteDirection.UP);
         }
     }
 
     public static class PromoteDownCommand extends PromoteCommand {
-        public PromoteDownCommand(UserStorage userStorage, TrackRepository trackRepository) {
-            super(userStorage, trackRepository, "demoteuser", PromoteDirection.DOWN);
+        public PromoteDownCommand(ACommand parent, UserStorage userStorage, TrackRepository trackRepository) {
+            super(parent, userStorage, trackRepository, "demoteuser", PromoteDirection.DOWN);
         }
     }
 
@@ -33,8 +33,8 @@ public abstract class PromoteCommand extends ACommand {
     private final PromoteDirection direction;
 
 
-    private PromoteCommand(UserStorage userStorage, TrackRepository trackRepository, String label, PromoteDirection direction) {
-        super(label);
+    private PromoteCommand(ACommand parent, UserStorage userStorage, TrackRepository trackRepository, String label, PromoteDirection direction) {
+        super(parent, label);
         this.userStorage = userStorage;
         this.trackRepository = trackRepository;
         this.direction = direction;
@@ -81,7 +81,7 @@ public abstract class PromoteCommand extends ACommand {
     }
 
     @Override
-    protected String getUsage() {
+    public String getUsage() {
         return "<user>";
     }
 }
