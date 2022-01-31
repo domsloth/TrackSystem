@@ -1,6 +1,7 @@
 package me.emirose.plugin.tracksystem.model;
 
 import com.google.common.collect.ImmutableMap;
+import org.bukkit.material.Tree;
 
 import java.util.*;
 
@@ -54,6 +55,14 @@ public class Track {
     }
 
 
+    public void update() {
+        TreeMap<Integer, Rank> copy = getRanksMap();
+        ranks.clear();
+
+        for (Rank value : copy.values()) {
+            addRank(value);
+        }
+    }
 }
 
 

@@ -114,6 +114,17 @@ public class TrackRepository {
         return defaultTrack.getRanks().size() > 0 ? defaultTrack.getRanks().get(0) : null;
     }
 
+    public TrackedRank getRank(String string) {
+        for (Track allTrack : getAllTracks()) {
+            for (Rank rank : allTrack.getRanks()) {
+                if (rank.getName().equalsIgnoreCase(string)) {
+                    return new TrackedRank(allTrack, rank);
+                }
+            }
+        }
+        return null;
+    }
+
     public enum TransactionResult {
         ERROR_ALREADY_HIGHEST,
         ERROR_ALREADY_LOWEST,

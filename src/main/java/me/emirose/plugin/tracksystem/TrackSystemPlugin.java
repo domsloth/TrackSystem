@@ -29,6 +29,7 @@ public final class TrackSystemPlugin extends JavaPlugin {
         new ShowTracksCommand(this);
         new UserInfoCommand(userStorage);
         new SetTrackCommand(userStorage, trackRepository);
+        new RankChangeWeightCommand(trackRepository);
         new PromoteCommand.PromoteUPCommand(userStorage, trackRepository);
         new PromoteCommand.PromoteDownCommand(userStorage, trackRepository);
     }
