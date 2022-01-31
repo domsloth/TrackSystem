@@ -1,10 +1,8 @@
 package me.emirose.plugin.tracksystem;
 
 import me.emirose.plugin.tracksystem.commands.impl.*;
-import me.emirose.plugin.tracksystem.database.ADatabase;
 import me.emirose.plugin.tracksystem.database.impl.user.InMemoryUserStorage;
 import me.emirose.plugin.tracksystem.database.impl.user.UserStorage;
-import me.emirose.plugin.tracksystem.model.User;
 import me.emirose.plugin.tracksystem.repo.TrackRepository;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,7 +28,7 @@ public final class TrackSystemPlugin extends JavaPlugin {
         new CreateTrackCommand(trackRepository);
         new ShowTracksCommand(this);
         new UserInfoCommand(userStorage);
-        new SetTrackCommand();
+        new SetTrackCommand(userStorage, trackRepository);
         new PromoteCommand(userStorage, trackRepository);
     }
 

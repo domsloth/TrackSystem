@@ -26,15 +26,16 @@ public class InMemoryUserStorage extends InMemoryCache<User> implements UserStor
 
     private void loadNewUser(User user) {
         Track defaultTrack = trackRepository.getTrack(0);
+        //Shouldn't happen
         if (defaultTrack == null) {
             System.out.println("No default track");
             return;
         }
 
-        Rank defaultRank = defaultTrack.getRanks().size() > 0 ? defaultTrack.getRanks().get(0) : null;
+        Rank defaultRank = trackRepository.getDefaultRankForTrack(defaultTrack);
 
         if (defaultRank == null) {
-            defaultRank = new Rank("NO_RANK", -1);
+            defaultRank = new Rank("default", -1);
         }
 
         user.setRank(new TrackedRank(defaultTrack, defaultRank));

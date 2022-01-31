@@ -19,12 +19,17 @@ public class TrackRepository {
         Track defaultTrack = new Track("default", 0);
         registerTrack(defaultTrack);
 
-        registerTrack(new Track("staff", 10));
+        Track staff = new Track("staff", 10);
+        registerTrack(staff);
 
         createRank("commoner", defaultTrack);
         createRank("apprentice", defaultTrack);
         createRank("hero", defaultTrack);
         createRank("lord", defaultTrack);
+
+        createRank("helper", staff);
+        createRank("moderator", staff);
+        createRank("admin", staff);
     }
 
     private void registerTrack(Track track) {
@@ -91,11 +96,18 @@ public class TrackRepository {
         return TransactionResult.SUCCESS;
     }
 
+    public void setTrack(User user, Track track) {
+        user.setRank(new TrackedRank(track, getDefaultRankForTrack(track)));
+    }
+
+    public Rank getDefaultRankForTrack(Track defaultTrack) {
+        return defaultTrack.getRanks().size() > 0 ? defaultTrack.getRanks().get(0) : null;
+    }
+
     public enum TransactionResult {
         ERROR_ALREADY_HIGHEST,
         ERROR_ALREADY_LOWEST,
-        SUCCESS,
-        ;
+        SUCCESS
     }
 
 }

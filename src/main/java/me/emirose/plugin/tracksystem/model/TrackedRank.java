@@ -1,7 +1,7 @@
 package me.emirose.plugin.tracksystem.model;
 
 /**
- * Simply represents a track combined with it's rank
+ * Simply represents a rank combined with it's track
  */
 public class TrackedRank {
 
