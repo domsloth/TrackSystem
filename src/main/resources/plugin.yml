@@ -1,0 +1,19 @@
+name: Tracksystem
+version: '${version}'
+main: me.emirose.plugin.tracksystem.TrackSystemPlugin
+
+commands:
+  showtracks:
+
+  createrank:
+
+  createtrack:
+
+  promoteuser:
+
+  demoteuser:
+
+  settrack:
+
+  userinfo:
+
