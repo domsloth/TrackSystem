@@ -26,7 +26,7 @@ Things I have not included, because they are overkill for a demo, are:</br>
     -> This is more likely the job of an Administrator to make it look pretty IMO </br> 
 
 I aimed for an easy to maintain workflow/framework.</br> 
-Code Refactoring is not included and this would be one of the next steps if this repository would be maintained.</br> 
+Code Refactoring or much of java-doc is not included and this would be one of the next steps if this repository would be maintained.</br> 
 
 ## About
 
