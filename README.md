@@ -1,6 +1,6 @@
 # TrackSystem
 
-## Preemble
+## Preamble
 
 This was created for an interview example to show-off skills.
 
